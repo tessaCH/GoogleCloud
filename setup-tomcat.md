@@ -92,7 +92,23 @@ sudo systemctl daemon-reload
 `sudo systemctl start tomcat` 或 `sudo service tomcat start`
 #### 確認Tomcat服務狀態
 `sudo systemctl status tomcat` 或 `sudo service tomcat status`
-#### 停用Tomcat服務
-`sudo systemctl stop tomcat` 或 `sudo service tomcat stop`
 #### 重啟Tomcat服務
 `sudo systemctl restart tomcat` 或 `sudo service tomcat restart`
+#### 停用Tomcat服務
+`sudo systemctl stop tomcat` 或 `sudo service tomcat stop`
+
+#### 修改Tomcat預設連接埠
+`sudo nano /opt/tomcat/conf/server.xml`
+在`<Service name="Catalina">`往下約十行，找到如下方文字，將`port="8080"`中的8080改為小於2的16次方的其他數字
+```
+    <Connector port="8080" protocol="HTTP/1.1"
+               connectionTimeout="20000"
+               redirectPort="8443" />
+```
+#### 開啟Tomcat管理頁面Manager App
+`sudo nano /opt/tomcat/conf/tomcat-users.xml`
+在`<tomcat-users `往下方的第三塊註解文字中，有`<role rolename="tomcat"/>`等文字，去掉註解或在無註解的地方加入
+```
+  <role rolename="manager-gui" />
+  <user username="使用者名稱" password="密碼" roles="manager-gui"/>
+```
