@@ -97,9 +97,11 @@ sudo systemctl daemon-reload
 #### 停用Tomcat服務
 `sudo systemctl stop tomcat` 或 `sudo service tomcat stop`
 
-#### 修改Tomcat預設連接埠
+#### 修改Tomcat預設連接埠、支援中文檔名
 `sudo nano /opt/tomcat/conf/server.xml`
-在`<Service name="Catalina">`往下約十行，找到如下方文字，將`port="8080"`中的8080改為小於2的16次方的其他數字
+在`<Service name="Catalina">`往下約十行，找到如下方文字。</br>
+1.變更預設連接埠： 將`port="8080"`中的8080改為小於2的16次方的其他數字</br>
+2.下載支援中文檔名： 在`redirectPort="8443"`後方加一行`URIEncoding="UTF-8"`
 ```
     <Connector port="8080" protocol="HTTP/1.1"
                connectionTimeout="20000"
